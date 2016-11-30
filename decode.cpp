@@ -19,6 +19,7 @@ int decode(int code)
  * tbd this needs to handle combinations of the switches if two or more
  * are simultaneously invoked.
 **************************************************************************/
+    Serial.println(code, HEX);
     
     if(code == 0){
         if(relayStatus == true){

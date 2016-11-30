@@ -184,10 +184,8 @@ int result = 0;
 
 void loop(void)
 {
-
-#if 1    
     checkPhone();
-#endif
+
     if (buttonStatus != oldButtonStatus) {
         Serial.print("button status: 0X");
         Serial.println(buttonStatus, HEX);
@@ -205,13 +203,15 @@ void loop(void)
     Serial.print(F("potVolts: "));
     Serial.println(potVolts);
 #endif
-    
+
+#if 0
     if(potVolts > 500){
         digitalWrite(REV_RELAY_DRV, 1);
     }
     else {
         digitalWrite(REV_RELAY_DRV, 0);
     }
+#endif    
     
 #if 0    
     potValue = analogRead(POT_OUT);
