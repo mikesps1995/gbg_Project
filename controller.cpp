@@ -199,6 +199,8 @@ void loop(void)
 
     potVolts = analogRead(POT_IN);
     analogWrite(POT_DRV, potVolts / 4);
+
+    
 #if 0    
     Serial.print(F("potVolts: "));
     Serial.println(potVolts);
