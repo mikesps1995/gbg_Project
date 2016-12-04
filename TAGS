@@ -1,38 +1,4 @@
 
-chkPhone.cpp,24
-void checkPhone(25,823
-
-controller.cpp,261
-    #define FACTORYRESET_ENABLE 61,2859
-    #define MINIMUM_FIRMWARE_VERSION 62,2901
-    #define MODE_LED_BEHAVIOUR 63,2949
-void error(87,4080
-void setupBT(108,4712
-int temp_time;171,6508
-int potVolts;172,6523
-int localTime;173,6537
-void loop(175,6553
-
-packetParser.cpp,377
-#define PACKET_ACC_LEN 13,283
-#define PACKET_GYRO_LEN 14,328
-#define PACKET_MAG_LEN 15,373
-#define PACKET_QUAT_LEN 16,418
-#define PACKET_BUTTON_LEN 17,463
-#define PACKET_COLOR_LEN 18,507
-#define PACKET_LOCATION_LEN 19,551
-#define READ_BUFSIZE 22,672
-uint8_t packetbuffer[packetbuffer26,760
-float parsefloat(33,1029
-void printHex(47,1428
-uint8_t readPacket(77,2175
-
-gbg.ino,89
-int potValue 58,1725
-int range_val 59,1744
-int cycle_time 60,1764
-void setup(66,1999
-
 BluefruitConfig.h,547
 #define BUFSIZE 5,280
 #define VERBOSE_MODE 6,370
@@ -59,3 +25,38 @@ gbg.h,211
 #define SPEED_POT 18,713
 #define RANGE_SENSOR 19,735
 #define POT_IN 20,760
+
+chkPhone.cpp,24
+void checkPhone(27,842
+
+controller.cpp,340
+    #define FACTORYRESET_ENABLE 61,2859
+    #define MINIMUM_FIRMWARE_VERSION 62,2901
+    #define MODE_LED_BEHAVIOUR 63,2949
+void error(92,4273
+void setupBT(113,4905
+int temp_time;178,6719
+int potVolts;179,6734
+int localTime;180,6748
+int buttonStatus 181,6763
+int  oldButtonStatus 182,6787
+int result 183,6818
+void loop(185,6835
+
+decode.cpp,47
+boolean relayStatus 10,356
+int decode(13,390
+
+packetParser.cpp,377
+#define PACKET_ACC_LEN 13,283
+#define PACKET_GYRO_LEN 14,328
+#define PACKET_MAG_LEN 15,373
+#define PACKET_QUAT_LEN 16,418
+#define PACKET_BUTTON_LEN 17,463
+#define PACKET_COLOR_LEN 18,507
+#define PACKET_LOCATION_LEN 19,551
+#define READ_BUFSIZE 22,672
+uint8_t packetbuffer[packetbuffer26,760
+float parsefloat(33,1029
+void printHex(47,1428
+uint8_t readPacket(77,2175
