@@ -197,11 +197,23 @@ void loop(void)
     temp_time = localTime - cycle_time;
     cycle_time = localTime;
 
+/**************************************************************************
+ * TBD
+ * check digital inputs
+ * act on digital inputs
+ * Check analog 5 (is being used as a din)
+ * act on A5
+ * read range sensor; print data
+ * compare to threshold
+ * act on data
+ * run relays per switches
+**************************************************************************/
+
+
+
+#if 0    
     potVolts = analogRead(POT_IN);
     analogWrite(POT_DRV, potVolts / 4);
-
-    
-#if 0    
     Serial.print(F("potVolts: "));
     Serial.println(potVolts);
 #endif
