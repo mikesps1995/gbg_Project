@@ -26,6 +26,15 @@ defines to cross the source files
 #define POT_IN A5
 
 /**************************************************************************
+ * Testmode flag is to control some of the compile optioins for testing
+ * hardware without a phone in the loop
+ * When 1 this will read a pot and run a relay (or two).
+ * When 0 the phone code is active.
+**************************************************************************/
+
+#define TESTMODE 1
+
+/**************************************************************************
  * The phone app (Android) has 8 buttons at the moment.
  * TBD look at the code sometime.
  * Buttons with commit are named, else they are numbered.

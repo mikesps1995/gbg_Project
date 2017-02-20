@@ -70,8 +70,10 @@ void setup(void)
   Serial.begin(115200);
   Serial.println(F("GBG controller"));
   Serial.println(F("--------------"));
-    
-  setupBT();
+  if(TESTMODE == 0){
+      setupBT();
+  }
+  
 
   pinMode(REM_LOCAL, INPUT_PULLUP);
   pinMode(REV_RELAY_DRV, OUTPUT);

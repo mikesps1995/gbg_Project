@@ -184,7 +184,10 @@ int result = 0;
 
 void loop(void)
 {
-    checkPhone();
+    if(TESTMODE == 0){
+        checkPhone();
+    }
+    
 
     if (buttonStatus != oldButtonStatus) {
         Serial.print("button status: 0X");
@@ -208,24 +211,34 @@ void loop(void)
  * act on data
  * run relays per switches
 **************************************************************************/
+/**************************************************************************
+ * some test code to run a relay based on the pot input.  Two switch
+ * points to run rev relay and the run relay
+**************************************************************************/
 
 
-
-#if 0    
-    potVolts = analogRead(POT_IN);
-    analogWrite(POT_DRV, potVolts / 4);
-    Serial.print(F("potVolts: "));
-    Serial.println(potVolts);
-#endif
-
-#if 0
-    if(potVolts > 500){
-        digitalWrite(REV_RELAY_DRV, 1);
-    }
-    else {
-        digitalWrite(REV_RELAY_DRV, 0);
-    }
-#endif    
+  if(TESTMODE == 1){
+      potVolts = analogRead(POT_IN);
+      analogWrite(POT_DRV, potVolts / 4);
+      Serial.print(F("potVolts: "));
+      Serial.println(potVolts);
+  }
+  
+  if(TESTMODE == 1){
+      if(potVolts > 500){
+          digitalWrite(REV_RELAY_DRV, 1);
+      }
+      else {
+          digitalWrite(REV_RELAY_DRV, 0);
+      }
+      if(potVolts > 700){       // test run relay too
+          digitalWrite(RUN_RELAY_DRV, 1);
+      }
+      else {
+          digitalWrite(RUN_RELAY_DRV, 0);
+      }
+  }
+  
     
 #if 0    
     potValue = analogRead(POT_OUT);
