@@ -29,6 +29,7 @@ int decode(int code)
  * The rotator is a 1 shifted left by a counter.  At each count, if the
  * result of 'and' with the code the switch is run.  Switch decodes the
  * particular bit.
+ * Actions are performed here, so motor can start or stop.
 **************************************************************************/
     Serial.println(code, HEX);
     
@@ -39,7 +40,6 @@ int decode(int code)
             digitalWrite(RUN_RELAY_DRV, 0);
         }
     }
-
     
     for(rotator = 0; rotator < 8; rotator++) {
         flags = 0xffff & (code & (1 << rotator));
@@ -58,6 +58,10 @@ int decode(int code)
                     break;
                 case 0x10:
                     Serial.println(" ACT_START ");
+                    if(relayStatus == false) {
+                        relayStatus = true;
+                        digitalWrite(RUN_RELAY_DRV, 1);
+                    }
                     break;
                 case 0x20:
                     Serial.println(" ACT_FASTER ");

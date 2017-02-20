@@ -75,7 +75,7 @@ void setup(void)
   }
   
 
-  pinMode(REM_LOCAL, INPUT_PULLUP);
+  pinMode(REM_LOCAL, INPUT);
   pinMode(REV_RELAY_DRV, OUTPUT);
   pinMode(RUN_RELAY_DRV, OUTPUT);
   pinMode(REV_RELAY_DRV, OUTPUT);

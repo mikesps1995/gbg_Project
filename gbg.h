@@ -13,8 +13,12 @@ defines to cross the source files
 **************************************************************************/
 #define REV_RELAY_DRV 2         // output
 #define RUN_RELAY_DRV 3         // output
+
 #define REM_LOCAL 5             // input
-#define OP_RLY 6                // input
+#define SPARE 6                // input
+#define REVERSE 10
+
+
 #define POT_DRV 9               /* this is a PWM output  */
                                 /* Range 0 to 255
                                  * this is not used this rev
@@ -23,16 +27,22 @@ defines to cross the source files
                                 /* tbd: check pwm frequncy-- either 490 or 980 Hz */
 #define SPEED_POT A0
 #define RANGE_SENSOR A1
-#define POT_IN A5
+#define OP_1 A5                 // using analog in to read operator
+                                // switch.
+                                // 1 = open, not moving
+                                // 0 = closed moving
+                                // 1 is 5v or above 1024/2
+                                // 0 is 0V or below 1024/2
+
 
 /**************************************************************************
- * Testmode flag is to control some of the compile optioins for testing
+ * Testmode flag is to control some of the compile options for testing
  * hardware without a phone in the loop
  * When 1 this will read a pot and run a relay (or two).
  * When 0 the phone code is active.
 **************************************************************************/
 
-#define TESTMODE 1
+#define TESTMODE 0
 
 /**************************************************************************
  * The phone app (Android) has 8 buttons at the moment.
