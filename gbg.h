@@ -41,8 +41,10 @@ defines to cross the source files
  * When 1 this will read a pot and run a relay (or two).
  * When 0 the phone code is active.
 **************************************************************************/
-
-#define TESTMODE 0
+#define TESTPHONE 1
+#define TESTIO 2
+#define RUNMANUAL 4
+#define TESTMODE RUNMANUAL
 
 /**************************************************************************
  * The phone app (Android) has 8 buttons at the moment.

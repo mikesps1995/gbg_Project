@@ -188,7 +188,9 @@ int op_switch = 0;
 
 void loop(void)
 {
-    if(TESTMODE == 0){
+    Serial.println(TESTMODE);
+    
+    if(TESTMODE & TESTPHONE == TESTPHONE){
         checkPhone();
     }
     if (buttonStatus != oldButtonStatus) {
@@ -197,6 +199,7 @@ void loop(void)
         oldButtonStatus = buttonStatus;
         phone_cmd  = decode(buttonStatus);
     }
+
     
     localTime = micros();
     temp_time = localTime - cycle_time;
@@ -218,20 +221,29 @@ void loop(void)
  * this is the decider we talked about.
  **************************************************************************/
     
-    if(TESTMODE == 0){
+    if((TESTMODE & RUNMANUAL) == RUNMANUAL) {
+        delay(1000);
+
         op_switch  = analogRead(OP_1);
         Serial.print(F("op_switch: "));
         Serial.println(op_switch);
-        if(op_switch > 1024/2) 
-            composite |= OP_STATUS;
-        else
+        if(op_switch > 1024/2) {
+            Serial.println("op released");
             composite &= ~OP_STATUS;
+        }
+        else {
+            Serial.println("op pressed");
+            composite |= OP_STATUS;
+        }
+        
 
            // range switch is analog input
            // The actual threshold values are tbd
            // Current sensor has 5 -18 inches for a
            // output of 2.8 to 1.2 volts (count from 580 to 257)
            // not much dynamic range for the distances we are going to see
+           //
+           // Kat: work the range code
         
         range_switch  = analogRead( RANGE_SENSOR);
         Serial.print(F("range_switch: "));
@@ -242,17 +254,22 @@ void loop(void)
         else
             composite &= ~RANGE_STATUS;
 
-        if(digitalRead(REVERSE) == 0)
+        if(digitalRead(REVERSE) == 0) {
+            Serial.println("reverse pressed");
             composite |= REV_STATUS;
-        else 
+        }
+        else {
+            Serial.println("reverse released");
             composite &= ~REV_STATUS;
-
-        if(digitalRead( REM_LOCAL) == 0)
+        }
+        
+        if(digitalRead(REM_LOCAL) == 0)
             composite |=  REM_STATUS;
         else
             composite &=  ~REM_STATUS;
-
-
+        
+        Serial.print("composite ");
+        Serial.println(composite, HEX);
 // set relays according to the state of phone and switches
 // phone_cmd
 // composite
@@ -264,31 +281,36 @@ void loop(void)
         if(phone_cmd & ACT_REV == ACT_REV)
 */        
         
-        if(composite & REV_STATUS == REV_STATUS)
+        if((composite & REV_STATUS) == REV_STATUS){
             digitalWrite(REV_RELAY_DRV, 1);
-        else
+        }
+        else {
             digitalWrite(REV_RELAY_DRV, 0);
-
-        if (composite & (OP_STATUS | RANGE_STATUS) == (OP_STATUS | RANGE_STATUS))
+        }
+           // this has to run when reverse is pressed
+        if ((composite & (OP_STATUS | RANGE_STATUS)) == (OP_STATUS | RANGE_STATUS)) {
             digitalWrite(RUN_RELAY_DRV, 1);
-        else
+        }
+        else{
             digitalWrite(RUN_RELAY_DRV, 0);
+        }
+        
 
-    } // end testmode == 0
+    } // end testmode == RUNMANUAL
 
 /**************************************************************************
  * some test code to run a relay based on the pot input.  Two switch
  * points to run rev relay and the run relay
  **************************************************************************/
 
-    if(TESTMODE == 1){
+    if(TESTMODE & TESTIO == TESTIO){
         potVolts = analogRead(SPEED_POT);
         analogWrite(POT_DRV, potVolts / 4);
         Serial.print(F("potVolts: "));
         Serial.println(potVolts);
     }
   
-    if(TESTMODE == 1){
+    if(TESTMODE & TESTIO == TESTIO){
         if(potVolts > 500){
             digitalWrite(REV_RELAY_DRV, 1);
         }

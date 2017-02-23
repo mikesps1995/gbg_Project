@@ -1,4 +1,46 @@
 
+chkPhone.cpp,24
+void checkPhone(27,842
+
+controller.cpp,522
+#define FACTORYRESET_ENABLE 61,2303
+#define MINIMUM_FIRMWARE_VERSION 62,2341
+#define MODE_LED_BEHAVIOUR 63,2385
+void error(92,3690
+void setupBT(113,4314
+#define OP_STATUS 174,6222
+#define RANGE_STATUS 175,6242
+#define REV_STATUS 176,6265
+#define REM_STATUS 177,6286
+int temp_time;179,6308
+int potVolts;180,6323
+int localTime;181,6337
+int buttonStatus 182,6352
+int oldButtonStatus 183,6376
+int phone_cmd 184,6406
+int composite 185,6425
+int range_switch 186,6444
+int op_switch 187,6466
+void loop(189,6486
+
+decode.cpp,47
+boolean relayStatus 10,356
+int decode(20,846
+
+packetParser.cpp,377
+#define PACKET_ACC_LEN 13,283
+#define PACKET_GYRO_LEN 14,328
+#define PACKET_MAG_LEN 15,373
+#define PACKET_QUAT_LEN 16,418
+#define PACKET_BUTTON_LEN 17,463
+#define PACKET_COLOR_LEN 18,507
+#define PACKET_LOCATION_LEN 19,551
+#define READ_BUFSIZE 22,672
+uint8_t packetbuffer[packetbuffer26,760
+float parsefloat(33,1029
+void printHex(47,1428
+uint8_t readPacket(77,2175
+
 BluefruitConfig.h,547
 #define BUFSIZE 5,280
 #define VERBOSE_MODE 6,370
@@ -16,47 +58,30 @@ BluefruitConfig.h,547
 #define BLUEFRUIT_SPI_MISO 56,3229
 #define BLUEFRUIT_SPI_MOSI 57,3271
 
-gbg.h,211
-#define REV_RELAY_DRV 11,454
-#define RUN_RELAY_DRV 12,479
-#define REM_LOCAL 13,504
-#define OP_RLY 14,525
-#define POT_DRV 15,543
-#define SPEED_POT 18,713
-#define RANGE_SENSOR 19,735
-#define POT_IN 20,760
-
-chkPhone.cpp,24
-void checkPhone(27,842
-
-controller.cpp,340
-    #define FACTORYRESET_ENABLE 61,2859
-    #define MINIMUM_FIRMWARE_VERSION 62,2901
-    #define MODE_LED_BEHAVIOUR 63,2949
-void error(92,4273
-void setupBT(113,4905
-int temp_time;178,6719
-int potVolts;179,6734
-int localTime;180,6748
-int buttonStatus 181,6763
-int  oldButtonStatus 182,6787
-int result 183,6818
-void loop(185,6835
-
-decode.cpp,47
-boolean relayStatus 10,356
-int decode(13,390
-
-packetParser.cpp,377
-#define PACKET_ACC_LEN 13,283
-#define PACKET_GYRO_LEN 14,328
-#define PACKET_MAG_LEN 15,373
-#define PACKET_QUAT_LEN 16,418
-#define PACKET_BUTTON_LEN 17,463
-#define PACKET_COLOR_LEN 18,507
-#define PACKET_LOCATION_LEN 19,551
-#define READ_BUFSIZE 22,672
-uint8_t packetbuffer[packetbuffer26,760
-float parsefloat(33,1029
-void printHex(47,1428
-uint8_t readPacket(77,2175
+gbg.h,677
+#define REV_RELAY_DRV 14,547
+#define RUN_RELAY_DRV 15,590
+#define REM_LOCAL 17,635
+#define SPARE 18,677
+#define REVERSE 19,718
+#define POT_DRV 22,742
+#define SPEED_POT 28,1059
+#define RANGE_SENSOR 29,1081
+#define OP_1 30,1106
+#define TESTMODE 45,1818
+#define BT_FWD 59,2479
+#define BT_SLOWER 60,2505
+#define BT_STOP 61,2534
+#define BT_START 62,2561
+#define BT_FASTER 63,2589
+#define BT_REV 64,2618
+#define BT_LIGHT 65,2644
+#define BT_HORN 66,2672
+#define ACT_FWD 75,3072
+#define ACT_SLOWER 76,3113
+#define ACT_STOP 77,3154
+#define ACT_START 78,3196
+#define ACT_FASTER 79,3238
+#define ACT_REV 80,3280
+#define ACT_LIGHT 81,3322
+#define ACT_HORN 82,3364
