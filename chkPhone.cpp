@@ -48,7 +48,12 @@ void checkPhone(void)
         Serial.println(blue, HEX);
     }
 
-       // Buttons
+/**************************************************************************
+ * Buttons
+ * There are 8 buttons available on the phone application.  This is what
+ * is used to control GBG.  All the rest of the code is left for reference
+**************************************************************************/
+
     if (packetbuffer[1] == 'B') {
         uint8_t buttnum = packetbuffer[2] - '0';
         boolean pressed = packetbuffer[3] - '0';

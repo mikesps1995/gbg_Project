@@ -38,11 +38,13 @@ defines to cross the source files
 /**************************************************************************
  * Testmode flag is to control some of the compile options for testing
  * hardware without a phone in the loop
- * When 1 this will read a pot and run a relay (or two).
- * When 0 the phone code is active.
+ * tbd RUNMANUAL will have to include the rem local switch
 **************************************************************************/
 
-#define TESTMODE 0
+#define TESTPHONE 1             // use to test or run the phone
+#define TESTIO 2                // to test IO
+#define RUNMANUAL 4             // to run manual, no phone
+
 
 /**************************************************************************
  * The phone app (Android) has 8 buttons at the moment.
