@@ -43,7 +43,7 @@ defines to cross the source files
 
 #define TESTPHONE 1             // use to test or run the phone
 #define TESTIO 2                // to test IO
-#define RUNMANUAL 4             // to run manual, no phone
+#define RUNMANUAL 4             // to run manual
 
 
 /**************************************************************************

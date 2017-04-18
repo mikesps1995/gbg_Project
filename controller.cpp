@@ -84,6 +84,7 @@ void checkPhone(void);
 int decode(int);                // declared as external
 
 
+
 #define OP_STATUS 1
 #define RANGE_STATUS 2
 #define REV_STATUS 4
@@ -105,7 +106,7 @@ int composite = 0;
 int range_switch = 0;
 int op_switch = 0;
 
-int testmode = RUNMANUAL;
+int testmode = RUNMANUAL | TESTPHONE;
 
 
 /**************************************************************************
@@ -141,19 +142,30 @@ void setup(void)
 
 void loop(void)
 {
+#if 0    
+    Serial.print("\ntestmode: ");
     Serial.println(testmode);
-    
+#endif    
     if(testmode & TESTPHONE == TESTPHONE){
         checkPhone();
     }
+
+/**************************************************************************
+ * Tue Apr 18, 2017  2:49 PM
+ * The button status (global) is returned from the phone.  Right now decode
+ * only scans the buttons and prints stuff.  Phone_cmd is actually button
+ * status and should be used to act on phone button presses.
+**************************************************************************/
+    
     if (buttonStatus != oldButtonStatus) {
+#if 0
         Serial.print("button status: 0X");
         Serial.println(buttonStatus, HEX);
+#endif
         oldButtonStatus = buttonStatus;
         phone_cmd  = decode(buttonStatus);
     }
 
-    
     localTime = micros();
     temp_time = localTime - cycle_time;
     cycle_time = localTime;
@@ -178,14 +190,16 @@ void loop(void)
         delay(100);
 
         op_switch  = analogRead(OP_1);
+#if 0
         Serial.print(F("\nop_switch: "));
         Serial.println(op_switch);
+#endif
         if(op_switch > 1024/2) {
-            Serial.println("op released");
+            Serial.print("op released ");
             composite &= ~OP_STATUS;
         }
         else {
-            Serial.println("op pressed");
+            Serial.print("op pressed ");
             composite |= OP_STATUS;
         }
 
@@ -198,7 +212,7 @@ void loop(void)
 ************************************************************************/
         range_switch  = analogRead( RANGE_SENSOR);
         Serial.print(F("range_switch: "));
-        Serial.println(range_switch);
+        Serial.print(range_switch);
 
         if((range_switch >= RANGE_MIN) && (range_switch <= RANGE_MAX)) {
             composite |= RANGE_STATUS;
@@ -208,11 +222,11 @@ void loop(void)
         }
         
         if(digitalRead(REVERSE) == 0) {
-            Serial.println("reverse pressed");
+            Serial.print(" reverse pressed ");
             composite |= REV_STATUS;
         }
         else {
-            Serial.println("reverse released");
+            Serial.print(" reverse released ");
             composite &= ~REV_STATUS;
         }
         
@@ -222,7 +236,9 @@ void loop(void)
             composite &=  ~REM_STATUS;
         
         Serial.print("composite ");
-        Serial.println(composite, HEX);
+        Serial.print(composite, HEX);
+        Serial.println("");
+        
         
 // set relays according to the state of phone and switches
 // phone_cmd
@@ -241,7 +257,6 @@ void loop(void)
            // except in reverse
            // just disable op_status here
         if ((composite & (OP_STATUS | RANGE_STATUS)) == (OP_STATUS | RANGE_STATUS)) {
-//        if((composite & OP_STATUS) == OP_STATUS){
             digitalWrite(RUN_RELAY_DRV, 1);
         }
         else{
@@ -263,14 +278,14 @@ void loop(void)
  * points to run rev relay and the run relay
  **************************************************************************/
 
-    if(testmode & TESTIO == TESTIO){
+    if((testmode & TESTIO) == TESTIO){
         potVolts = analogRead(SPEED_POT);
         analogWrite(POT_DRV, potVolts / 4);
         Serial.print(F("potVolts: "));
         Serial.println(potVolts);
     }
   
-    if(testmode & TESTIO == TESTIO){
+    if((testmode & TESTIO) == TESTIO){
         if(potVolts > 500){
             digitalWrite(REV_RELAY_DRV, 1);
         }

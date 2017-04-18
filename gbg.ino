@@ -89,9 +89,11 @@ extern Adafruit_BluefruitLE_SPI ble;
 
 
 // A small helper
+// tbd mje changed code to return after error instead of hang
 void error(const __FlashStringHelper*err) {
     Serial.println(err);
-    while (1);
+    return(2);
+    while (1);                  /* dead code */
 }
 
 // function prototypes over in packetparser.cpp
@@ -110,6 +112,7 @@ extern uint8_t packetbuffer[];
 /**************************************************************************/
 void setupBT(void)
 {
+    int countdown = 0;
 
        /* Initialise the module */
     Serial.print(F("Initialising the Bluefruit LE module: "));
@@ -129,8 +132,6 @@ void setupBT(void)
             error(F("Couldn't factory reset"));
         }
     }
-
-
        /* Disable command echo from Bluefruit */
     ble.echo(false);
 
@@ -146,11 +147,14 @@ void setupBT(void)
 
        /* Wait for connection */
     while (! ble.isConnected()) {
+        if(countdown++ > 10) {
+            break;
+        }
         Serial.print(F("*"));
         delay(500);
     }
 
-    Serial.println(F("******************************"));
+    Serial.println(F("****** CONNECT ************************"));
 
        // LED Activity command is only supported from 0.6.6
     if ( ble.isVersionAtLeast(MINIMUM_FIRMWARE_VERSION) )
@@ -164,7 +168,7 @@ void setupBT(void)
     Serial.println( F("Switching to DATA mode!") );
     ble.setMode(BLUEFRUIT_MODE_DATA);
 
-    Serial.println(F("******************************"));
+    Serial.println(F("******** DATA ****************"));
 
 }
 

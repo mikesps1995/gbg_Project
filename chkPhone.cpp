@@ -57,21 +57,20 @@ void checkPhone(void)
     if (packetbuffer[1] == 'B') {
         uint8_t buttnum = packetbuffer[2] - '0';
         boolean pressed = packetbuffer[3] - '0';
-        Serial.print ("Button "); Serial.println(buttnum, HEX);
+        Serial.print ("Button "); Serial.print(buttnum, HEX);
+        Serial.print(" ");
         
         if (pressed) {
-            Serial.println(1 << buttnum, HEX);
-            
+            Serial.print(1 << buttnum, HEX);
             buttonStatus |= (1 << buttnum);
-            Serial.println(" pressed  ");
+            Serial.print(" pressed  ");
         } else {
             buttonStatus &= (~(1 << buttnum));
-            Serial.println((~(1 << buttnum)), HEX);
-            
-            Serial.println(" released  ");
+            Serial.print((~(1 << buttnum)), HEX);
+            Serial.print(" released  ");
         }
-        Serial.println(buttonStatus, HEX);
-        
+        Serial.print(" buttonStatus ");
+        Serial.print( buttonStatus, HEX);
     }
 
        // GPS Location
